@@ -78,14 +78,9 @@ namespace ElevatorSimulator
 			// Verify that every elevator is empty
 			for (int i = 0; i < elevators.Length; i++)
 			{
-				int[] passengers = elevators[i].Passengers;
-
-				for (int j = 0; j < passengers.Length; j++)
+				if (elevators[i].TotalPassengers != 0)
 				{
-					if (passengers[j] != 0)
-					{
-						return false;
-					}
+					return false;
 				}
 			}
 
