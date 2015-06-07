@@ -12,7 +12,7 @@ namespace ElevatorSimulator
 		public bool[][] FindFastestPossibleConfiguration(int[] elevatorCapacities, int[] floorPopulations, int trials)
 		{
 			bool[][][] allPosibilities = Generator.GenerateElevatorConfigurations(floorPopulations.Length, elevatorCapacities.Length);
-            return FindFastestConfiguration(allPosibilities, elevatorCapacities, floorPopulations, trials);
+			return FindFastestConfiguration(allPosibilities, elevatorCapacities, floorPopulations, trials);
 		}
 
 		public bool[][] FindFastestConfiguration(bool[][][] elevatorConfigurations, int[] elevatorCapacities, int[] floorPopulations, int trials)
@@ -20,7 +20,7 @@ namespace ElevatorSimulator
 			double fastestTime = -1; // Overwritten later
 			bool[][] fastestConfiguration = null; // Overwritten later
 
-			for(int i = 0; i < elevatorConfigurations.Length; i++)
+			for (int i = 0; i < elevatorConfigurations.Length; i++)
 			{
 				bool[][] currentConfiguration = elevatorConfigurations[i];
 				double currentAverageTime = SimulateAverage(currentConfiguration, elevatorCapacities, floorPopulations, trials);
@@ -38,7 +38,7 @@ namespace ElevatorSimulator
 		public double SimulateAverage(bool[][] elevatorConfiguration, int[] elevatorCapacities, int[] floorPopulations, int trials)
 		{
 			int total = 0;
-			for(int i = 0; i < trials; i++)
+			for (int i = 0; i < trials; i++)
 			{
 				total += Simulate(elevatorConfiguration, elevatorCapacities, floorPopulations);
 			}

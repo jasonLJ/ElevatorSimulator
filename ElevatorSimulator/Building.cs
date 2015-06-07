@@ -33,29 +33,29 @@ namespace ElevatorSimulator
 			// Main simulation loop
 			bool simulating = true;
 			int seconds = 0;
-			while(simulating)
+			while (simulating)
 			{
 				seconds += 1;
-				for(int i = 0; i < elevators.Length; i++)
+				for (int i = 0; i < elevators.Length; i++)
 				{
 					elevators[i].SimulateStep();
 				}
 
-				if(IsDoneSimulating(waitingPeople, elevators))
+				if (IsDoneSimulating(waitingPeople, elevators))
 				{
 					simulating = false;
 				}
 			}
 
 			return seconds;
-        }
+		}
 
 		/* MISCELLANEOUS */
 		private Elevator[] CreateElevators(bool[][] elevatorConfiguration, int[] elevatorCapacities)
 		{
 			Elevator[] elevators = new Elevator[elevatorConfiguration.Length];
 
-			for(int i = 0; i < elevators.Length; i++)
+			for (int i = 0; i < elevators.Length; i++)
 			{
 				Elevator newElevator = new Elevator(elevatorConfiguration[i], elevatorCapacities[i]);
 				elevators[i] = newElevator;
@@ -67,22 +67,22 @@ namespace ElevatorSimulator
 		private bool IsDoneSimulating(int[] waitingPeople, Elevator[] elevators)
 		{
 			// Verify that we have no one waiting
-			for(int i = 0; i < waitingPeople.Length; i++)
+			for (int i = 0; i < waitingPeople.Length; i++)
 			{
-				if(waitingPeople[i] != 0)
+				if (waitingPeople[i] != 0)
 				{
 					return false;
 				}
 			}
 
 			// Verify that every elevator is empty
-			for(int i = 0; i < elevators.Length; i++)
+			for (int i = 0; i < elevators.Length; i++)
 			{
 				int[] passengers = elevators[i].Passengers;
 
-				for(int j = 0; j < passengers.Length; j++)
+				for (int j = 0; j < passengers.Length; j++)
 				{
-					if(passengers[j] != 0)
+					if (passengers[j] != 0)
 					{
 						return false;
 					}
