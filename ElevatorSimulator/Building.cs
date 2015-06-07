@@ -9,16 +9,39 @@ namespace ElevatorSimulator
 	class Building
 	{
 		/* FIELDS */
-		private int[] _waitingPeople;
-		private int[] _elevatorCapacities;
 		private bool[][] _elevatorConfiguration;
+		private int[] _elevatorCapacities;
+		private int[] _waitingPeople;
+		private int _elevatorWaitingTime;
+		private int _elevatorMovementTime;
+
+		/* PROPERTIES */
+		public int[] WaitingPeople
+		{
+			get
+			{
+				return _waitingPeople;
+			}
+			set
+			{
+				_waitingPeople = value;
+			}
+		}
 
 		/* INITIALIZATION */
-		public Building(bool[][] elevatorConfiguration, int[] elevatorCapacities, int[] floorPopulations)
+		public Building(bool[][] elevatorConfiguration, int[] elevatorCapacities, int[] floorPopulations, int elevatorWaitingTime, int elevatorMovementTime)
 		{
+			this._waitingPeople = new int[floorPopulations.Length];
 			Array.Copy(floorPopulations, _waitingPeople, floorPopulations.Length);
+
+			this._elevatorCapacities = new int[elevatorCapacities.Length];
 			Array.Copy(elevatorCapacities, _elevatorCapacities, elevatorCapacities.Length);
+
+			this._elevatorConfiguration = new bool[elevatorConfiguration.Length][];
 			Array.Copy(elevatorConfiguration, _elevatorConfiguration, elevatorConfiguration.Length);
+
+			this._elevatorWaitingTime = elevatorWaitingTime;
+			this._elevatorMovementTime = elevatorMovementTime;
 		}
 
 		/* SIMULATION */
@@ -28,7 +51,7 @@ namespace ElevatorSimulator
 			int[] waitingPeople = new int[this._waitingPeople.Length];
 			Array.Copy(this._waitingPeople, waitingPeople, this._waitingPeople.Length);
 
-			Elevator[] elevators = CreateElevators(_elevatorConfiguration, _elevatorCapacities);
+			Elevator[] elevators = CreateElevators(_elevatorConfiguration, _elevatorCapacities, _elevatorWaitingTime, _elevatorMovementTime);
 
 			// Main simulation loop
 			bool simulating = true;
@@ -51,13 +74,13 @@ namespace ElevatorSimulator
 		}
 
 		/* MISCELLANEOUS */
-		private Elevator[] CreateElevators(bool[][] elevatorConfiguration, int[] elevatorCapacities)
+		private Elevator[] CreateElevators(bool[][] elevatorConfiguration, int[] elevatorCapacities, int waitingTime, int movementTime)
 		{
 			Elevator[] elevators = new Elevator[elevatorConfiguration.Length];
 
 			for (int i = 0; i < elevators.Length; i++)
 			{
-				Elevator newElevator = new Elevator(elevatorConfiguration[i], elevatorCapacities[i]);
+				Elevator newElevator = new Elevator(this, elevatorConfiguration[i], elevatorCapacities[i], waitingTime, movementTime);
 				elevators[i] = newElevator;
 			}
 

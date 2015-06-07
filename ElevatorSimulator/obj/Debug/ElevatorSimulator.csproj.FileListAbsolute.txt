@@ -7,3 +7,6 @@ C:\Users\Jason\Documents\Visual Studio 2015\Projects\CSCanary\ElevatorSimulator\
 C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\bin\Debug\ElevatorSimulator.exe.config
 C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\obj\Debug\ElevatorSimulator.exe
 C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\obj\Debug\ElevatorSimulator.pdb
+C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\obj\Debug\ElevatorSimulator.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\bin\Debug\ElevatorSimulator.exe
+C:\Users\Jason\Documents\Visual Studio 2015\Projects\ElevatorSimulator\ElevatorSimulator\bin\Debug\ElevatorSimulator.pdb
