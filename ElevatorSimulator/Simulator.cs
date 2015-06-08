@@ -28,11 +28,19 @@ namespace ElevatorSimulator
 					if(i % printoutInterval == 0)
 					{
 						float percent = ((float)i / (float)elevatorConfigurations.Length) * 100f;
-						Console.WriteLine("{0} of {1} simulations ran. - {3}", i, elevatorConfigurations.Length, percent);
+						Console.WriteLine("{0} of {1} simulations ran. - {2}%", i, elevatorConfigurations.Length, percent.ToString("#0.00"));
 					}
 				}
 
 				bool[][] currentConfiguration = elevatorConfigurations[i];
+
+				// Make sure this is a valid configuration
+				if (!IsValidConfiguration(currentConfiguration))
+				{
+					// Skip this simulation
+					continue;
+				}
+
 				double currentAverageTime = SimulateAverage(currentConfiguration, elevatorCapacities, floorPopulations, elevatorWaitingTime, elevatorMovementTime, trials);
 
 				if (currentAverageTime < fastestTime || fastestTime == -1)
@@ -60,6 +68,34 @@ namespace ElevatorSimulator
 		{
 			Building building = new Building(elevatorConfiguration, elevatorCapacities, floorPopulations, elevatorWaitingTime, elevatorMovementTime);
 			return building.Simulate();
+		}
+
+		/* MISCELLANEOUS */
+		private static bool IsValidConfiguration(bool[][] elevatorConfiguration)
+		{
+			bool[] floorHasElevator = new bool[elevatorConfiguration[0].Length];
+
+			for(int elevator = 0; elevator < elevatorConfiguration.Length; elevator++)
+			{
+				for (int floor = 0; floor < elevatorConfiguration[elevator].Length; floor++)
+				{
+					if(elevatorConfiguration[elevator][floor])
+					{
+						floorHasElevator[floor] = true;
+					}
+				}
+			}
+
+			// Make sure each floor has an elevator going to it
+			for(int i = 0; i < floorHasElevator.Length; i++)
+			{
+				if(!floorHasElevator[i])
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 	}
 }

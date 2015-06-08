@@ -11,26 +11,28 @@ namespace ElevatorSimulator
 		static void Main(string[] args)
 		{
 			// Setup simulation details
-			int[] elevatorCapacities = { 0, 0, 0, 0 };
-			int[] floorPopulations = { 0, 80, 80, 80, 80 };
-			/*
+			int[] elevatorCapacities = { 10, 10, 10, 10 };
+			int[] floorPopulations = { 80, 80, 80, 80, 80 };
+
+			int waitTime = 22;
+			int moveTime = 3;
+	
 			int trials = 10;
+			int printInterval = 1000;
 
-			bool[][] fastestConfiguration = Simulator.FindFastestPossibleConfiguration(elevatorCapacities, floorPopulations, trials, 1000);
-			*/
+			bool[][] fastestConfiguration = Simulator.FindFastestPossibleConfiguration(elevatorCapacities, floorPopulations, waitTime, moveTime, trials, printInterval);
 
-			Console.WriteLine("Beginning...");
 
-			bool[][][] elevatorConfigs = Generator.GenerateElevatorConfigurations(5, 4);
-			bool[][] config = elevatorConfigs[elevatorConfigs.Length - 1];
-
-			int time = Simulator.Simulate(config, elevatorCapacities, floorPopulations, 22, 3);
-
-			Console.WriteLine(time);
 
 			// Prevent auto-closing
 			Console.WriteLine("Press any key to terminate...");
 			Console.ReadKey();
         }
+
+		/* STATIC METHODS */
+		public static string ArrayToString(int[] array)
+		{
+			return String.Join(",", array.Select(p => p.ToString()).ToArray());
+		}
 	}
 }

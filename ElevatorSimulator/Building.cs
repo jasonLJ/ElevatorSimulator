@@ -47,10 +47,6 @@ namespace ElevatorSimulator
 		/* SIMULATION */
 		public int Simulate()
 		{
-			// Making local copies of everything we need
-			int[] waitingPeople = new int[this._waitingPeople.Length];
-			Array.Copy(this._waitingPeople, waitingPeople, this._waitingPeople.Length);
-
 			Elevator[] elevators = CreateElevators(_elevatorConfiguration, _elevatorCapacities, _elevatorWaitingTime, _elevatorMovementTime);
 
 			// Main simulation loop
@@ -64,7 +60,7 @@ namespace ElevatorSimulator
 					elevators[i].SimulateStep();
 				}
 
-				if (IsDoneSimulating(waitingPeople, elevators))
+				if (IsDoneSimulating(_waitingPeople, elevators))
 				{
 					simulating = false;
 				}

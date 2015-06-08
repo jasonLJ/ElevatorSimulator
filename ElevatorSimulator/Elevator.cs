@@ -85,12 +85,14 @@ namespace ElevatorSimulator
 			this._building = building;
 			this._floorConfiguration = floorConfiguration;
 			this._capacity = capacity;
+			this._waitingTime = waitingTime;
+			this._movementTime = movementTime;
 
 			int floorCount = floorConfiguration.Length;
 			this._passengers = new int[floorCount];
 
 			// Setup simulation fields
-			this._currentFloor = 0;
+			this._currentFloor = GroundFloor;
 			this._waitingTimer = 0;
 			this._movementTimer = 0;
 
@@ -172,12 +174,12 @@ namespace ElevatorSimulator
 		/* SIMULATION ACTIONS */
 		private bool IsWaiting()
 		{
-			return _waitingTimer != 0;
+			return _waitingTimer > 0;
 		}
 
 		private bool IsMoving()
 		{
-			return _movementTimer != 0;
+			return _movementTimer > 0;
 		}
 
 		private void SimulateWait()
@@ -266,7 +268,7 @@ namespace ElevatorSimulator
 		{
 			for(int i = 0; i < FloorConfigurationAsInts.Length; i++)
 			{
-				if (_building.WaitingPeople[i] != 0)
+				if (_building.WaitingPeople[FloorConfigurationAsInts[i]] != 0)
 				{
 					return false;
 				}
