@@ -1,4 +1,12 @@
-﻿using System;
+/*
+	This is a C# re-write of a program I originally wrote in Java
+	This version isn't much better, as both programs were written in
+	a marathon session of caffeine-fueled, late-night programming.
+	
+	Look on in disgust, as it is written poorly.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
